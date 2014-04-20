@@ -1,7 +1,10 @@
 AR Drone Steam DualShock
 =============
+##What does it do?
+If you have a Parrot AR Drone, a DualShock controller and a WebGL enabled browser, this repository can serve you a webpage with a videostream from your drone, and some info dumps on the drone itself and your dualshock controller. This repository has only just begun, the plan is to make an interface to fly your drone from the browser (or at least with DualShock).
+
 ##Prerequisites
-Nodejs, Gulp, Compass
+Nodejs, Gulp, Compass, Parrot AR Drone 2.0, Dualshock 3, WebGL
 
 ##How to install stuff
 Linux users may have to install a few additional libs for a dependency, node-hid (it connects to USB devices for you), to work:
