@@ -19,6 +19,8 @@ controller.on('error', function(data) {
 });
 
 
+
+
 var io = require('socket.io').listen(8082);
 io.sockets.on('connection', function (socket) {
     console.log('New IO connection');
@@ -36,9 +38,21 @@ input.buttons.map(function handleButton(button) {
   controller.on(button+':release',function(data) {route.apply(this, ['button', button+':release', data]);});
 });
 input.motion.map(function handleButton(button) {
-  controller.on(button+':motion',function(data) {route.apply(this, ['motion', button+':motion', data]);});
+  //controller.on(button+':motion',function(data) {route.apply(this, ['motion', button+':motion', data]);});
 });
 input.status.map(function handleButton(button) {
   controller.on(button+':change',function(data) {route.apply(this, ['status', button+':change', data]);});
 });
 controller.connect();
+
+//if(0) {
+  var arDrone = require('ar-drone');
+  var arClient  = arDrone.createClient();
+  arClient.createRepl();
+
+  arClient.on('navdata', function(data) {
+    if(!data || !data.demo || !data.demo.velocity || !data.demo.rotation)
+      return;
+    io.sockets.emit('ardrone', { type: 'position', event: 'update', data: { velocity: data.demo.velocity, rotation: data.demo.rotation}});
+  });
+//}

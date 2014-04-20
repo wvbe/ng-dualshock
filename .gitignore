@@ -1,2 +1,6 @@
-/node_modules
+node_modules/
+.sass-cache/
+config.rb
+public/*.html
+public/*.css
 

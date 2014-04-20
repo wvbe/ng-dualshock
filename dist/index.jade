@@ -1,0 +1,87 @@
+doctype html
+html(lang="en")
+	head
+		title Parrot AR/Dualshock cockpit
+		link(rel='stylesheet', href='http://localhost:5556/style.css')
+		script(type='text/javascript', src='http://localhost:5555/dronestream/nodecopter-client.js')
+		script(type='text/javascript', src='http://localhost:8082/socket.io/socket.io.js')
+		//script(type='text/javascript', src='app.js')
+		script(type='text/javascript').
+			window.onload = function() {
+				new NodecopterStream(document.getElementById("drone-stream"));
+				var socket = io.connect('http://localhost:8082');
+				socket.on('dualshock', function (data) {
+					if(data.type=='button') {
+						handleButton(data);
+					}
+					if(data.type=='analog') {
+						handleAnalog(data);
+					}
+				});
+				socket.on('ardrone', function (data) {
+
+					if(false && data.type=='position') {
+						var el = document.getElementById('drone-velocity-knob');
+						el.style.top = Math.round(data.data.velocity.x)+'px';
+						el.style.left = Math.round(data.data.velocity.y)+'px';
+						var elRoll = document.getElementById('horizon');
+						elRoll.setAttribute('style', 'transform: rotate('+Math.round(data.data.rotation.roll)+'deg); -webkit-transform: rotate('+Math.round(data.data.rotation.roll)+'deg);');
+						var elRoll = document.getElementById('droneStream');
+						elRoll.setAttribute('style', 'transform: rotate('+Math.round(data.data.rotation.roll)+'deg); -webkit-transform: rotate('+Math.round(data.data.rotation.roll)+'deg);');
+					}
+				});
+			}
+			function handleButton(data) {
+				var desc = data.event.split(':');
+				var el = document.getElementById('dualshock-'+desc[0]);
+				if(desc[1] == 'press') {
+					el.className = 'pressed';
+				} else if(desc[1] =  'release') {
+					el.className = 'released';
+				}
+			}
+			function handleAnalog(data) {
+				var desc = data.event.split(':');
+				var el = document.getElementById('dualshock-'+desc[0]+'-knob');
+				el.style.left = data.data.x/2.55+'%';
+				el.style.top = data.data.y/2.55+'%';
+			}		
+	body
+		#drone
+			.plane
+				label Velocity
+				#drone-velocity-knob.knob
+			.plane
+				label Roll
+				#drone-horizon-knob.knob
+			#drone-stream
+		#dualshock
+			.analog-left.plane
+				#dualshock-left-knob.knob
+			.analog-right.plane
+				#dualshock-right-knob.knob
+
+			.buttons
+				button#dualshock-l2 L2
+				button#dualshock-l1 L1
+
+				button#dualshock-dpadLeft &larr;
+				button#dualshock-dpadUp &uarr;
+				button#dualshock-dpadDown &darr;
+				button#dualshock-dpadRight &rarr;
+
+				button#dualshock-leftAnalogBump LA
+
+				button#dualshock-start START
+				button#dualshock-psxButton PS
+				button#dualshock-select SELECT
+
+				button#dualshock-rightAnalogBump RA
+
+				button#dualshock-square &#9632;
+				button#dualshock-triangle &#9650;
+				button#dualshock-x &times;
+				button#dualshock-circle &bull;
+
+				button#dualshock-r1 R1
+				button#dualshock-r2 R2
