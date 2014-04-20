@@ -38,6 +38,9 @@ How to boot up
 Gulp tasks do most of the stuff
 
 ```gulp server``` - Runs the Dualshock, AR Drone, Dronestream and Express servers
+
 ```gulp watch``` - Runs the LiveReload server (use in combination with Chrome extension) and watch for SASS/Jade changes
+
 ```gulp once``` - Compile all SASS and Jade once
+
 ```gulp``` - Default, run all of the above
