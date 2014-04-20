@@ -19,7 +19,7 @@ Then, after cloning this repository, you can:
 npm install
 ```
 
-Before running, you may want to connect your AR Drone to the same (wireless enabled) network your PC is on, instead of connecting your computer to the drone's hotspot. Telnet to your drone and type into BusyBox:
+Before running, you may want to connect your AR Drone to the same (wireless enabled) network your PC is on, instead of connecting your computer to the drone's hotspot. Your network needs to be public! Connect a wifi enabled device to the drone for now, telnet to your drone (something like ```telnet 192.168.1.1```) and type into BusyBox:
 ```
 echo iwconfig ath0 mode managed essid NAME_OF_YOUR_NETWORK > /data/ap.sh
 echo ifconfig ath0 192.168.1.1 netmask 255.255.255.0 up >> /data/ap.sh
@@ -27,10 +27,11 @@ echo route add default gw 192.168.1.254 >> /data/ap.sh
 chmod 755 /data/ap.sh
 ```
 
-Now every time your drone reboots, telnet to the drone again and run:
+AFter this, and every time your drone reboots, run on the drone:
 ```
-/data/ap.sj
+/data/ap.sh
 ```
+The device you used to initially connect to the drone's hotspot will now lose it's connection because the drone is connecting to an existing network.
 
 ##How to run stuff
 
