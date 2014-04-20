@@ -4,13 +4,55 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Stream as module</title>
     <script src="/dronestream/nodecopter-client.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://localhost:8082/socket.io/socket.io.js"></script>
+<script>
+window.onload = function() {
+	  var socket = io.connect('http://localhost:8082');
+	  socket.on('dualshock', function (data) {
+	      if(data.type=='button') {
+	        handleButton(data);
+	      }
+
+	  });
+	}
+  function handleButton(data) {
+    var desc = data.event.split(':');
+    var el = document.getElementById(desc[0]);
+    if(desc[1] == 'press') {
+      el.className = 'pressed';
+    } else if(desc[1] =  'release') {
+      el.className = 'released';
+    }
+  }
+</script>
+<style>
+.pressed {
+	border: 3px solid green;
+}
+.released {
+	border: 3px solid red;
+}
+</style>
 </head>
 <body>
     <h1 id="heading">Stream through a normal require("http").createServer</h1>
-    <div id="droneStream" style="width: 640px; height: 360px">   </div>
-
+    <div id="droneStream" style="width: 720px; height: 480px">   </div>
     <script type="text/javascript" charset="utf-8">
         new NodecopterStream(document.getElementById("droneStream"));
     </script>
+<div id="controller">
+  <div id="buttons-left">
+    <button id="square">SQ</button>
+    <button id="triangle">TR</button>
+    <button id="circle">CI</button>
+    <button id="x">X</button>
+  </div>
+  <div id="buttons-left">
+    <button id="dpadUp">DU</button>
+    <button id="dpadRight">DR</button>
+    <button id="dpadDown">DD</button>
+    <button id="dpadLeft">DL</button>
+  </div>
+</div>
 </body>
 </html>
