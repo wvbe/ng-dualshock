@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 	compass = require('gulp-compass'),
 	dest = '';
 
-gulp.task('default', ['server', 'watch']);
+gulp.task('default', ['once', 'server', 'watch']);
 
 gulp.task('server', function(next) {
 	require('./server');
