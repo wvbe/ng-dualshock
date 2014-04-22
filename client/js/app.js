@@ -3,7 +3,8 @@ angular.module('ngdualshock', [
     'btford.socket-io',
     'xf.dualshock.dsanalog',
     'xf.dualshock.dsbutton',
-    'xf.dualshock.dsmotion'
+    'xf.dualshock.dsmotion',
+    'xf.dualshock.dsstatus'
 ])
 .service('xfDualshockService', ['$rootScope', 'socketFactory', function($rootScope, socketFactory) {
 	var ioSocket = io.connect('http://localhost:8082');
