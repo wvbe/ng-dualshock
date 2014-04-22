@@ -9,7 +9,7 @@ var dualShock = require('dualshock-controller');
 var controller = dualShock(
     {
         config : "dualShock3",
-        accelerometerSmoothing : true,
+        accelerometerSmoothing : false,
         analogStickSmoothing : false
     });
 
@@ -21,13 +21,13 @@ controller.on('error', function(data) {
 
 
 
-var io = require('socket.io').listen(8082);
+var io = require('socket.io').listen(8082, {log: false});
 io.sockets.on('connection', function (socket) {
     console.log('New IO connection');
 });
 
 function route(type, event, data) {
-  io.sockets.emit('dualshock', { type: type, event: event, data: data});
+  io.sockets.emit(type, { event: event, data: data});
 }
 
 input.analog.map(function handleButton(button) {
@@ -38,7 +38,10 @@ input.buttons.map(function handleButton(button) {
   controller.on(button+':release',function(data) {route.apply(this, ['button', button+':release', data]);});
 });
 input.motion.map(function handleButton(button) {
-  //controller.on(button+':motion',function(data) {route.apply(this, ['motion', button+':motion', data]);});
+  controller.on(button+':motion',function(data) {
+    if(button=='rightLeft')
+      console.log(data)
+    route.apply(this, ['motion', button+':motion', data]);});
 });
 input.status.map(function handleButton(button) {
   controller.on(button+':change',function(data) {route.apply(this, ['status', button+':change', data]);});
