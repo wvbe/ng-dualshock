@@ -5,28 +5,39 @@ html(lang="en", ng-app='ngdualshock')
         link(rel='stylesheet', href='/css/style.css')
         script(type='text/javascript', src='http://localhost:8082/socket.io/socket.io.js')
     body
-        div(ds-button, key='square') SQUARE {{pressed | json}}
-        div(ds-button, key='triangle') TRIANGLE {{pressed | json}}
-        div(ds-button,key='circle') CIRCLE {{pressed | json}}
-        div(ds-button, key='x') X {{pressed | json}}
+        section#button-test
+            h1 Button test
+            div
+                div(ds-button, key='l2') L2
+                div(ds-button, key='l1') L1
+                div(ds-button, key='dpadLeft') &larr;
+                div(ds-button, key='dpadUp') &uarr;
+                div(ds-button, key='dpadDown') &darr;
+                div(ds-button, key='dpadRight') &rarr;
+                div(ds-button, key='leftAnalogBump') LA
+                div(ds-button, key='start') START
+                div(ds-button, key='psxButton') PS
+                div(ds-button, key='select') SELECT
+                div(ds-button, key='rightAnalogBump') RA
+                div(ds-button, key='square') &#9632;
+                div(ds-button, key='triangle') &#9650;
+                div(ds-button, key='x') &times;
+                div(ds-button, key='circle') &bull;
+                div(ds-button, key='r1') R1
+                div(ds-button, key='r2') R2
 
-        div(ds-analog, key='left')
-            .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
-            span {{getValue()}}
-        //div(ds-analog, key='right')
-        //  .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
 
-        div(ds-motion, key='rightLeft')
-            .knob(style='{{getStyle()}}')
+        section#analog-test
+            h1 Analog test
+            div(ds-analog, key='left')
+                .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
+            div(ds-analog, key='right')
+              .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
 
-        div(ds-button, key='l1') L1 {{pressed | json}}
-        div(ds-button, key='l2') L2 {{pressed | json}}
-
-        div(ds-button, key='r1') R1 {{pressed | json}}
-        div(ds-button, key='r2') R2 {{pressed | json}}
-
-        div(ds-button, key='select') select {{pressed | json}}
-        div(ds-button, key='start') start {{pressed | json}}
+        section#motion-test
+            h1 Motion test
+            div(ds-motion, key='rightLeft')
+                .knob(style='{{getStyle()}}')
 
         script(type='text/javascript', src='/vendor/angular/angular.js')
         script(type='text/javascript', src='/vendor/angular-socket-io/socket.js')

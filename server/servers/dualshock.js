@@ -15,6 +15,7 @@ var controller = dualShock(
 
 //make sure you add an error event handler
 controller.on('error', function(data) {
+  console.error('DUALSHOCK ERROR', data);
   //...someStuffDidNotWork();
 });
 
@@ -27,23 +28,21 @@ io.sockets.on('connection', function (socket) {
 });
 
 function route(type, event, data) {
+  console.log(type,event,data);
   io.sockets.emit(type, { event: event, data: data});
 }
 
-input.analog.map(function handleButton(button) {
+input.analog.map(function handleAnalog(button) {
   controller.on(button+':move',function(data) {route.apply(this, ['analog', button+':move', data]);});
 });
 input.buttons.map(function handleButton(button) {
   controller.on(button+':press',function(data) {route.apply(this, ['button', button+':press', data]);});
   controller.on(button+':release',function(data) {route.apply(this, ['button', button+':release', data]);});
 });
-input.motion.map(function handleButton(button) {
-  controller.on(button+':motion',function(data) {
-    if(button=='rightLeft')
-      console.log(data)
-    route.apply(this, ['motion', button+':motion', data]);});
+input.motion.map(function handleMotion(button) {
+  controller.on(button+':motion',function(data) { console.log('Motion');route.apply(this, ['motion', button+':motion', data]);});
 });
-input.status.map(function handleButton(button) {
+input.status.map(function handleStatus(button) {
   controller.on(button+':change',function(data) {route.apply(this, ['status', button+':change', data]);});
 });
-controller.connect();
+//controller.connect();
