@@ -1,0 +1,24 @@
+body
+	background-color: #222
+	color: #ccc
+
+#dualshock
+	position: relative
+	width: 666px
+	height: 200px
+	
+	.buttons
+		position: absolute
+		bottom: 0px
+		height: 32px
+		width: 100%
+		left: 0
+		> *
+			background-color: #444
+			border: none
+			min-width: 32px
+			height: 100%
+			line-height: 32px
+			text-align: center
+			&.pressed
+				background-color: orange

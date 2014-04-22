@@ -1,8 +1,5 @@
-node_modules/
+.idea
 .sass-cache/
-config.rb
-public/vendor/
-public/*.html
-public/*.css
-public/*.js
 bower_components/
+build/
+node_modules/

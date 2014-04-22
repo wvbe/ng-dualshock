@@ -1,20 +1,18 @@
 {
-  "name": "ardronestreamdualshock",
+  "name": "ng-dualshock",
   "version": "0.0.1",
-  "description": "Prerequisites ============= Nodejs, Gulp, Compass",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server/server.js"
   },
   "author": "wvbe",
   "license": "MIT",
   "dependencies": {
     "express": "^4.0.0",
     "socket.io": "^0.9.16",
-    "dualshock-controller": "^0.6.4",
-    "ar-drone": "^0.3.1",
-    "dronestream": "^1.1.1"
+    "dualshock-controller": "^0.6.4"
   },
   "devDependencies": {
     "gulp-livereload": "^1.3.1",
@@ -24,16 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/wvbe/ardronestreamdualshock.git"
+    "url": "git://github.com/wvbe/ng-dualshock.git"
   },
   "keywords": [
-    "ar",
-    "drone",
-    "parrot",
     "dualshock"
   ],
   "bugs": {
-    "url": "https://github.com/wvbe/ardronestreamdualshock/issues"
+    "url": "https://github.com/wvbe/ng-dualshock/issues"
   },
-  "homepage": "https://github.com/wvbe/ardronestreamdualshock"
+  "homepage": "https://github.com/wvbe/ng-dualshock"
 }
