@@ -1,6 +1,8 @@
 angular.module('ngdualshock', [
-	//'angular',
-	'btford.socket-io',
+    //'angular',
+    'btford.socket-io',
+    'xf.dualshock.dsanalog',
+    'xf.dualshock.dsbutton',
     'xf.dualshock.dsmotion'
 ])
 .service('xfDualshockService', ['$rootScope', 'socketFactory', function($rootScope, socketFactory) {
@@ -47,65 +49,4 @@ angular.module('ngdualshock', [
 }])
 .run(function(xfDualshockService) {
 	xfDualshockService.init();
-})
-
-
-/**
-* Dualshock Button
-**/
-.directive('dsButton', ['$rootScope',function($rootScope) {
-	return {
-		link: function ($scope, $element, $attr, $controller) {
-			var keyName = $attr.key;
-			if(!keyName)
-				return console.error('dsButton needs a key!');
-			$scope.pressed = false; // reversed because of weird update https://github.com/rdepena/node-dualshock-controller/commit/5cf237906e778ac913bc915ca404942b72f986ef
-			$rootScope.$on('dualshock:button:'+keyName+':press', function(){
-				$scope.pressed = false;
-			});
-			$rootScope.$on('dualshock:button:'+keyName+':release', function(){
-				$scope.pressed = true; // reversed because of weird update https://github.com/rdepena/node-dualshock-controller/commit/5cf237906e778ac913bc915ca404942b72f986ef
-			});
-		},
-		'restrict': 'EA',
-		scope: true
-	};
-}])
-
-
-/**
-* Dualshock Analog sticks
-**/
-.directive('dsAnalog', ['$rootScope',function($rootScope) {
-	return {
-		link: function ($scope, $element, $attr, $controller) {
-			var keyName = $attr.key;
-			if(!keyName)
-				return console.error('dsAnalog needs a key!');
-			
-			var position = {x:128,y:128};
-
-			$rootScope.$on('dualshock:analog:'+keyName+':move', function(evnt, data){
-				position = data;
-			});
-
-			$scope.getValue = function() {
-				return Math.sqrt(position.x*position.x+position.y*position.y)
-			}
-			$scope.getMultiplier = function() {
-				return {
-					x: position.x/255*2-1,
-					y: position.y/255*2-1
-				}
-			};
-			$scope.getPercentile = function() {
-				return {
-					x: position.x/255*100,
-					y: position.y/255*100
-				}
-			};
-		},
-		'restrict': 'EA',
-		scope: true
-	};
-}]);
+});
