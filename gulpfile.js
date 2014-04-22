@@ -1,15 +1,13 @@
-var gulp = require('gulp'),
-    livereload = require('gulp-livereload'),
-    path = require('path'),
-    jade = require('gulp-jade'),
+var bower = require('gulp-bower'),
     compass = require('gulp-compass'),
-    dest = '';
+    gulp = require('gulp'),
+    jade = require('gulp-jade'),
+    livereload = require('gulp-livereload');
 
+var path = require('path');
+
+gulp.task('init', ['install', 'once']);
 gulp.task('default', ['once', 'server', 'watch']);
-
-gulp.task('server', function (next) {
-    require('./server/server');
-});
 
 gulp.task('once', [
     'jade',
@@ -18,6 +16,10 @@ gulp.task('once', [
     'img',
     'bower'
 ]);
+
+gulp.task('server', function (next) {
+    require('./server/server');
+});
 
 gulp.task('jade', function () {
     var YOUR_LOCALS = {};
@@ -30,18 +32,27 @@ gulp.task('jade', function () {
         })
         .pipe(gulp.dest('./build/'))
 });
-gulp.task('bower', function () {
-    gulp.src('./bower_components/*/*.js', {base: './bower_components/'})
+
+gulp.task('install', function () {
+    bower()
         .pipe(gulp.dest('./build/vendor/'));
 });
+
+gulp.task('bower', function () {
+    gulp.src('./bower_components/*/**', {base: './bower_components/'})
+        .pipe(gulp.dest('./build/vendor/'));
+});
+
 gulp.task('img', function () {
     gulp.src('./client/img/**', {base: './client/'})
         .pipe(gulp.dest('./build/'));
 });
+
 gulp.task('js', function () {
     gulp.src('./client/js/*.js', {base: './client/'})
         .pipe(gulp.dest('./build/'));
 });
+
 gulp.task('sass', function () {
     gulp.src('./client/sass/*.sass')
         .pipe(compass({

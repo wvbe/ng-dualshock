@@ -2,7 +2,8 @@
   "name": "ng-dualshock",
   "version": "0",
   "authors": [
-    "wvbe <wybe@x-54.com>"
+    "wvbe <wybe@x-54.com>",
+    "Weyland <weyland404@p0mp.com>"
   ],
   "license": "MIT",
   "ignore": [
