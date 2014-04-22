@@ -7,7 +7,7 @@ var bower = require('gulp-bower'),
 var path = require('path');
 
 gulp.task('init', ['install', 'once']);
-gulp.task('default', ['once', 'server', 'watch']);
+gulp.task('default', ['once', 'watch']);
 
 gulp.task('once', [
     'jade',
@@ -22,10 +22,10 @@ gulp.task('server', function (next) {
 });
 
 gulp.task('jade', function () {
-    var YOUR_LOCALS = {};
+    var locals = {};
     gulp.src(['./client/jade/*.jade', './client/jade/**/*.jade'], {base: './client/jade/'})
         .pipe(jade({
-            locals: YOUR_LOCALS
+            locals: locals
         }))
         .on('error', function (err) {
             console.error('Jade could not be compiled\n' + err.message);
@@ -49,7 +49,7 @@ gulp.task('img', function () {
 });
 
 gulp.task('js', function () {
-    gulp.src('./client/js/*.js', {base: './client/'})
+    gulp.src(['./client/js/*/*.js', './client/js/*.js'], {base: './client/'})
         .pipe(gulp.dest('./build/'));
 });
 
