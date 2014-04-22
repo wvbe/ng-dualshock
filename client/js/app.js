@@ -91,6 +91,9 @@ angular.module('ngdualshock', [
 				position = data;
 			});
 
+			$scope.getValue = function() {
+				return Math.sqrt(position.x*position.x+position.y*position.y)
+			}
 			$scope.getMultiplier = function() {
 				return {
 					x: position.x/255*2-1,
