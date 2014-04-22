@@ -59,20 +59,18 @@ angular.module('ngdualshock', [
 			var keyName = $attr.key;
 			if(!keyName)
 				return console.error('dsButton needs a key!');
-			$scope.state = false;
+			$scope.pressed = false; // reversed because of weird update https://github.com/rdepena/node-dualshock-controller/commit/5cf237906e778ac913bc915ca404942b72f986ef
 			$rootScope.$on('dualshock:button:'+keyName+':press', function(){
-				$scope.state = true;
+				$scope.pressed = false;
 			});
 			$rootScope.$on('dualshock:button:'+keyName+':release', function(){
-				$scope.state = false;
+				$scope.pressed = true; // reversed because of weird update https://github.com/rdepena/node-dualshock-controller/commit/5cf237906e778ac913bc915ca404942b72f986ef
 			});
 		},
 		'restrict': 'EA',
 		scope: true
 	};
 }])
-
-
 
 
 /**
