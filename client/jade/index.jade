@@ -3,48 +3,33 @@ html(lang="en", ng-app='ngdualshock')
     head
         title Parrot AR/Dualshock cockpit
         script(type='text/javascript', src='/vendor/angular/angular.js')
-        link(rel='stylesheet', href='http://localhost:5556/style.css')
+        link(rel='stylesheet', href='/css/style.css')
         script(type='text/javascript', src='http://localhost:8082/socket.io/socket.io.js')
         script(type='text/javascript', src='/vendor/angular-socket-io/socket.js')
-        script(type='text/javascript', src='app.js')
-
+        script(type='text/javascript', src='/js/app.js')
+            
     body
+        div(ds-button, key='square') SQUARE {{state | json}}
+        div(ds-button, key='triangle') TRIANGLE {{state | json}}
+        div(ds-button,key='circle') CIRCLE {{state | json}}
+        div(ds-button, key='x') X {{state | json}}
 
-        ds-button(key='triangle')
+        div(ds-analog, key='left')
+            .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
+        //div(ds-analog, key='right')
+        //  .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
 
-        ds-analog(key='left')
+        div(ds-motion, key='rightLeft')
+            .knob(style='{{getStyle()}}')
 
-        ds-status(key='charging')
 
-        ds-motion(key='yaw')
 
-        #dualshock
-            .analog-left.plane
-                #dualshock-left-knob.knob
-            .analog-right.plane
-                #dualshock-right-knob.knob
 
-            .buttons
-                button#dualshock-l2 L2
-                button#dualshock-l1 L1
+        div(ds-button, key='l1') L1 {{state | json}}
+        div(ds-button, key='l2') L2 {{state | json}}
 
-                button#dualshock-dpadLeft &larr;
-                button#dualshock-dpadUp &uarr;
-                button#dualshock-dpadDown &darr;
-                button#dualshock-dpadRight &rarr;
+        div(ds-button, key='r1') R1 {{state | json}}
+        div(ds-button, key='r2') R2 {{state | json}}
 
-                button#dualshock-leftAnalogBump LA
-
-                button#dualshock-start START
-                button#dualshock-psxButton PS
-                button#dualshock-select SELECT
-
-                button#dualshock-rightAnalogBump RA
-
-                button#dualshock-square &#9632;
-                button#dualshock-triangle &#9650;
-                button#dualshock-x &times;
-                button#dualshock-circle &bull;
-
-                button#dualshock-r1 R1
-                button#dualshock-r2 R2
+        div(ds-button, key='select') select {{state | json}}
+        div(ds-button, key='start') start {{state | json}}

@@ -22,3 +22,36 @@ body
 			text-align: center
 			&.pressed
 				background-color: orange
+
+
+*[ds-button]
+	display: block
+
+*[ds-analog]
+	position: relative
+	width: 300px
+	height: 300px
+	background-color: #eee
+	> *:first-child
+		position: absolute
+		display: block
+		top: 50%
+		left: 50%
+		width: 10px
+		height: 10px
+		margin: -5px
+		background-color: #000
+
+
+*[ds-motion]
+	position: relative
+	width: 300px
+	height: 30px
+	background-color: #eee
+	> *:first-child
+		position: absolute
+		display: block
+		top: 0
+		width: 0px
+		height: 100%
+		background-color: #000
