@@ -18,14 +18,26 @@ html(lang="en")
 						handleAnalog(data);
 					}
 				});
+
+				function normalizeDroneVelocity(vel) {
+					var max = 100;
+					return (Math.round(vel)/max+0.5*max)+'%';
+				}
 				socket.on('ardrone', function (data) {
 
-					if(false && data.type=='position') {
+					if(data.type=='position') {
+
+
+
 						var el = document.getElementById('drone-velocity-knob');
-						el.style.top = Math.round(data.data.velocity.x)+'px';
-						el.style.left = Math.round(data.data.velocity.y)+'px';
+						el.style.top = normalizeDroneVelocity(data.data.velocity.y);
+						el.style.left = normalizeDroneVelocity(data.data.velocity.x);
+
+
+						// roll
 						var elRoll = document.getElementById('horizon');
 						elRoll.setAttribute('style', 'transform: rotate('+Math.round(data.data.rotation.roll)+'deg); -webkit-transform: rotate('+Math.round(data.data.rotation.roll)+'deg);');
+						// rotation
 						var elRoll = document.getElementById('droneStream');
 						elRoll.setAttribute('style', 'transform: rotate('+Math.round(data.data.rotation.roll)+'deg); -webkit-transform: rotate('+Math.round(data.data.rotation.roll)+'deg);');
 					}
@@ -49,12 +61,15 @@ html(lang="en")
 	body
 		#drone
 			.plane
-				label Velocity
 				#drone-velocity-knob.knob
 			.plane
 				label Roll
 				#drone-horizon-knob.knob
+
+			.blaat
+				#horizon
 			#drone-stream
+
 		#dualshock
 			.analog-left.plane
 				#dualshock-left-knob.knob
