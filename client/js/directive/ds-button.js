@@ -5,12 +5,12 @@ angular.module('xf.dualshock.dsbutton', ['ngdualshock'])
                 var keyName = $attr.key;
                 if (!keyName)
                     return console.error('dsButton needs a key!');
-                $scope.state = false;
+                $scope.pressed = false;
                 $rootScope.$on('dualshock:button:' + keyName + ':press', function () {
-                    $scope.state = true;
+                    $scope.pressed = false;
                 });
                 $rootScope.$on('dualshock:button:' + keyName + ':release', function () {
-                    $scope.state = false;
+                    $scope.pressed = true;
                 });
             },
             'restrict': 'EA',
