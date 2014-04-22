@@ -1,6 +1,8 @@
 node_modules/
 .sass-cache/
 config.rb
+public/vendor/
 public/*.html
 public/*.css
-
+public/*.js
+bower_components/

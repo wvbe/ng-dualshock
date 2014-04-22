@@ -44,15 +44,3 @@ input.status.map(function handleButton(button) {
   controller.on(button+':change',function(data) {route.apply(this, ['status', button+':change', data]);});
 });
 controller.connect();
-
-//if(0) {
-  var arDrone = require('ar-drone');
-  var arClient  = arDrone.createClient();
-  arClient.createRepl();
-
-  arClient.on('navdata', function(data) {
-    if(!data || !data.demo || !data.demo.velocity || !data.demo.rotation)
-      return;
-    io.sockets.emit('ardrone', { type: 'position', event: 'update', data: { velocity: data.demo.velocity, rotation: data.demo.rotation}});
-  });
-//}

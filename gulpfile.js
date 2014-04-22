@@ -11,7 +11,7 @@ gulp.task('server', function(next) {
 	require('./server');
 });
 
-gulp.task('once', ['jade', 'compass']);
+gulp.task('once', ['jade', 'compass', 'js']);
 
 gulp.task('jade', function() {
 	  var YOUR_LOCALS = {};
@@ -25,7 +25,14 @@ gulp.task('jade', function() {
     })
     .pipe(gulp.dest('./public/'))
 });
-
+gulp.task('bower', function() {
+    gulp.src('./bower_components/*/*.js', {base: './bower_components/'})
+  .pipe(gulp.dest('./public/vendor/'));
+});
+gulp.task('js', function() {
+    gulp.src('./dist/*.js', {base: './dist/'})
+  .pipe(gulp.dest('./public/'));
+});
 gulp.task('compass', function() {
     gulp.src('./dist/*.sass')
     .pipe(compass({
@@ -47,5 +54,6 @@ gulp.task('watch', function() {
 		server.changed(file.path);
 	});
 	gulp.watch('./dist/**/*.sass', ['compass']);
-	gulp.watch('./dist/**/*.jade', ['jade']);
+    gulp.watch('./dist/**/*.jade', ['jade']);
+    gulp.watch('./dist/**/*.js', ['js']);
 });
