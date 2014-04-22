@@ -7,7 +7,7 @@ var bower = require('gulp-bower'),
 var path = require('path');
 
 gulp.task('init', ['install', 'once']);
-gulp.task('default', ['once', 'watch']);
+gulp.task('default', ['once', 'server', 'watch']);
 
 gulp.task('once', [
     'jade',

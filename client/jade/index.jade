@@ -19,14 +19,14 @@ html(lang="en", ng-app='ngdualshock')
         div(ds-motion, key='rightLeft')
             .knob(style='{{getStyle()}}')
 
-        div(ds-button, key='l1') L1 {{state | json}}
-        div(ds-button, key='l2') L2 {{state | json}}
+        div(ds-button, key='l1') L1 {{pressed | json}}
+        div(ds-button, key='l2') L2 {{pressed | json}}
 
-        div(ds-button, key='r1') R1 {{state | json}}
-        div(ds-button, key='r2') R2 {{state | json}}
+        div(ds-button, key='r1') R1 {{pressed | json}}
+        div(ds-button, key='r2') R2 {{pressed | json}}
 
-        div(ds-button, key='select') select {{state | json}}
-        div(ds-button, key='start') start {{state | json}}
+        div(ds-button, key='select') select {{pressed | json}}
+        div(ds-button, key='start') start {{pressed | json}}
 
         script(type='text/javascript', src='/vendor/angular/angular.js')
         script(type='text/javascript', src='/vendor/angular-socket-io/socket.js')
