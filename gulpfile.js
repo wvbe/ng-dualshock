@@ -5,17 +5,18 @@ var gulp = require('gulp'),
     compass = require('gulp-compass'),
     dest = '';
 
-gulp.task('default', ['once']);
+gulp.task('default', ['once', 'server', 'watch']);
 
 gulp.task('server', function (next) {
-    //require('./server');
+    require('./server/server');
 });
 
 gulp.task('once', [
     'jade',
     'sass',
     'js',
-    'img'
+    'img',
+    'bower'
 ]);
 
 gulp.task('jade', function () {
