@@ -5,17 +5,24 @@ html(lang="en", ng-app='ngdualshock')
         link(rel='stylesheet', href='/css/style.css')
         script(type='text/javascript', src='http://localhost:8082/socket.io/socket.io.js')
     body
+        h1 BUTTON
         div(ds-button, key='square') SQUARE {{pressed | json}}
         div(ds-button, key='triangle') TRIANGLE {{pressed | json}}
         div(ds-button,key='circle') CIRCLE {{pressed | json}}
         div(ds-button, key='x') X {{pressed | json}}
 
+        h1 STATUS
+        div(ds-status) CONNECTION {{connection | json}}
+
+        h1 ANALOG
         div(ds-analog, key='left')
             .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
             span {{getValue()}}
-        //div(ds-analog, key='right')
-        //  .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
+        div(ds-analog, key='right')
+            .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
+            span {{getValue()}}
 
+        h1 MOTION
         div(ds-motion, key='rightLeft')
             .knob(style='{{getStyle()}}')
 
@@ -34,3 +41,4 @@ html(lang="en", ng-app='ngdualshock')
         script(type='text/javascript', src='/js/directive/ds-analog.js')
         script(type='text/javascript', src='/js/directive/ds-button.js')
         script(type='text/javascript', src='/js/directive/ds-motion.js')
+        script(type='text/javascript', src='/js/directive/ds-status.js')
