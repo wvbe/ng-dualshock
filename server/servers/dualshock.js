@@ -19,9 +19,6 @@ controller.on('error', function(data) {
   //...someStuffDidNotWork();
 });
 
-
-
-
 var io = require('socket.io').listen(8082, {log: false});
 io.sockets.on('connection', function (socket) {
     console.log('New IO connection');

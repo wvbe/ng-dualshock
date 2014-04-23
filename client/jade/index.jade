@@ -5,43 +5,62 @@ html(lang="en", ng-app='ngdualshock')
         link(rel='stylesheet', href='/css/style.css')
         script(type='text/javascript', src='http://localhost:8082/socket.io/socket.io.js')
     body
-        section#button-test
-            h1 Button test
-            div
-                div(ds-button, key='l2') L2
-                div(ds-button, key='l1') L1
-                div(ds-button, key='dpadLeft') &larr;
-                div(ds-button, key='dpadUp') &uarr;
-                div(ds-button, key='dpadDown') &darr;
-                div(ds-button, key='dpadRight') &rarr;
-                div(ds-button, key='leftAnalogBump') LA
-                div(ds-button, key='start') START
-                div(ds-button, key='psxButton') PS
-                div(ds-button, key='select') SELECT
-                div(ds-button, key='rightAnalogBump') RA
-                div(ds-button, key='square') &#9632;
-                div(ds-button, key='triangle') &#9650;
-                div(ds-button, key='x') &times;
-                div(ds-button, key='circle') &bull;
-                div(ds-button, key='r1') R1
-                div(ds-button, key='r2') R2
+        #debug(ng-controller='debugController')
+            h1 DualShock service state
+            pre {{ debug | json }}
+        #layout
+            section#button-test
+                h1 Button test
+                div
+                    div(ds-button, key='l2') L2
+                    div(ds-button, key='l1') L1
+                    div(ds-button, key='dpadLeft') &larr;
+                    div(ds-button, key='dpadUp') &uarr;
+                    div(ds-button, key='dpadDown') &darr;
+                    div(ds-button, key='dpadRight') &rarr;
+                    div(ds-button, key='leftAnalogBump') LA
+                    div(ds-button, key='start') START
+                    div(ds-button, key='psxButton') PS
+                    div(ds-button, key='select') SELECT
+                    div(ds-button, key='rightAnalogBump') RA
+                    div(ds-button, key='square') &#9632;
+                    div(ds-button, key='triangle') &#9650;
+                    div(ds-button, key='x') &times;
+                    div(ds-button, key='circle') &bull;
+                    div(ds-button, key='r1') R1
+                    div(ds-button, key='r2') R2
 
 
-        section#analog-test
-            h1 Analog test
-            div(ds-analog, key='left')
-                .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
-            div(ds-analog, key='right')
-              .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
+            section#analog-test
+                h1 Analog test
+                div(ds-analog, key='left')
+                    .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
+                    pre Positioning (%) {{getPercentile() | json}}
+                    pre Force vector {{getVector() | json}}
+                    pre Force vector size {{getValue()}}
 
-        section#motion-test
-            h1 Motion test
-            div(ds-motion, key='rightLeft')
-                .knob(style='{{getStyle()}}')
+                div(ds-analog, key='right')
+                  .knob(style='top: {{getPercentile().y}}%; left: {{getPercentile().x}}%;')
+                  pre Positioning (%) {{getPercentile() | json}}
+                  pre Force vector {{getVector() | json}}
+                  pre Force vector size {{getValue()}}
 
-        script(type='text/javascript', src='/vendor/angular/angular.js')
-        script(type='text/javascript', src='/vendor/angular-socket-io/socket.js')
-        script(type='text/javascript', src='/js/app.js')
-        script(type='text/javascript', src='/js/directive/ds-analog.js')
-        script(type='text/javascript', src='/js/directive/ds-button.js')
-        script(type='text/javascript', src='/js/directive/ds-motion.js')
+
+            section#motion-test
+                h1 Motion test
+                div(ds-motion, key='rightLeft')
+                    .knob(style='{{getStyle()}}')
+                    label rightLeft force vector size {{getValue()}} ({{getRaw()}})
+                div(ds-motion, key='upDown')
+                    .knob(style='{{getStyle()}}')
+                    label upDown force vector size {{getValue()}} ({{getRaw()}})
+                div(ds-motion, key='forwardBackward')
+                    .knob(style='{{getStyle()}}')
+                    label forwardBackward force vector size {{getValue()}} ({{getRaw()}})
+
+            script(type='text/javascript', src='/vendor/angular/angular.js')
+            script(type='text/javascript', src='/vendor/angular-socket-io/socket.js')
+            script(type='text/javascript', src='/js/app.js')
+            script(type='text/javascript', src='/js/directive/ds-analog.js')
+            script(type='text/javascript', src='/js/directive/ds-button.js')
+            script(type='text/javascript', src='/js/directive/ds-motion.js')
