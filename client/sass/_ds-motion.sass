@@ -1,0 +1,27 @@
+// Bare minimum for directive behaviour
+*[ds-motion]
+	position: relative
+	> *:first-child
+		position: absolute
+		display: block
+		top: 0
+		width: 0px
+		height: 100%
+
+
+// Theme
+*[ds-motion]
+	margin: 10px
+	width: 400px
+	height: 30px
+	border: 1px solid #111
+	text-align: center
+	line-height: 30px
+	> *:first-child
+		background-color: #111
+		border-left: 2px solid #111
+		border-right: 2px solid #111
+		margin-left: -2px
+		z-index: -1
+	> label
+		display: block

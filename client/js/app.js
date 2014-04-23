@@ -37,6 +37,7 @@ angular.module('ngdualshock', [
 					var name = desc[0];
 					var evnt = desc[1];
 					$rootScope.$emit(['dualshock', buttonType, name, evnt].join(':'), update.data);
+					state[buttonType][name] = (buttonType=='button'?(evnt=='release'?true:false):update.data);
 				})
 			})(buttonType);
 		}
@@ -44,10 +45,13 @@ angular.module('ngdualshock', [
 
 	return {
 		init: init,
-		getState: function() { return state; },
+		getState: function() { console.log('Getting state'); return state; },
 		socket: xfDualshockIo
 	}
 }])
 .run(function(xfDualshockService) {
 	xfDualshockService.init();
-});
+}).controller('debugController', ['$scope', 'xfDualshockService', function($scope, xfDualshockService){
+	$scope.debug = xfDualshockService.getState();
+	console.log($scope.debug);
+}]);
