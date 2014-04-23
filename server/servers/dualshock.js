@@ -10,7 +10,8 @@ var controller = dualShock(
     {
         config : "dualShock3",
         accelerometerSmoothing : false,
-        analogStickSmoothing : false
+        analogStickSmoothing : false,
+        forceNodeHid: true // Use legacay node-hid to include motion data (requires sudo)
     });
 
 //make sure you add an error event handler
@@ -37,7 +38,7 @@ input.buttons.map(function handleButton(button) {
   controller.on(button+':release',function(data) {route.apply(this, ['button', button+':release', data]);});
 });
 input.motion.map(function handleMotion(button) {
-  controller.on(button+':motion',function(data) { console.log('Motion');route.apply(this, ['motion', button+':motion', data]);});
+  controller.on(button+':motion',function(data) { route.apply(this, ['motion', button+':motion', data]);});
 });
 input.status.map(function handleStatus(button) {
   controller.on(button+':change',function(data) {route.apply(this, ['status', button+':change', data]);});

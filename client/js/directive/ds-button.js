@@ -8,12 +8,12 @@ angular.module('xf.dualshock.dsbutton', ['ngdualshock'])
                 $scope.pressed = false;
                 $element.addClass('released');
 
-                $rootScope.$on('dualshock:button:' + keyName + ':release', function () {
+                $rootScope.$on('dualshock:button:' + keyName + ':press', function () {
                     $scope.pressed = true;
                     $element.addClass('pressed').removeClass('released');
                 });
 
-                $rootScope.$on('dualshock:button:' + keyName + ':press', function () {
+                $rootScope.$on('dualshock:button:' + keyName + ':release', function () {
                     $scope.pressed = false;
                     $element.addClass('released').removeClass('pressed');
                 });
