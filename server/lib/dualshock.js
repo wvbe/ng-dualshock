@@ -1,3 +1,5 @@
+var dualShock = require('dualshock-controller');
+
 var input = {
     analog: 'left,right'.split(','),
     buttons: 'l1,l2,r1,r2,triangle,circle,square,x,start,select,leftAnalogBump,rightAnalogBump,dpadUp,dpadDown,dpadLeft,dpadRight,psxButton'.split(','),
@@ -5,22 +7,19 @@ var input = {
     status: 'charging,battery,connection'.split(',')
 };
 
-var dualShock = require('dualshock-controller');
-var controller = dualShock(
-    {
-        config: "dualShock3",
-        accelerometerSmoothing: false,
-        analogStickSmoothing: false,
-        forceNodeHid: true // Use legacay node-hid to include motion data (requires sudo)
-    });
-
-//make sure you add an error event handler
-controller.on('error', function (data) {
-    console.error('DUALSHOCK ERROR', data);
-    //...someStuffDidNotWork();
+var controller = dualShock({
+    accelerometerSmoothing: false,
+    analogStickSmoothing: false,
+    config: "dualShock3",
+    forceNodeHid: true // Use legacay node-hid to include motion data (requires sudo)
 });
 
-var io = require('socket.io').listen(8082, {log: false});
+// make sure you add an error event handler
+controller.on('error', function (data) {
+    console.error('DUALSHOCK ERROR', data);
+});
+
+var io = require('socket.io').listen(8082, { log: false });
 io.sockets.on('connection', function (socket) {
     console.log('Established socket.io connection.');
 });
@@ -53,3 +52,4 @@ input.status.map(function handleStatus(button) {
         route.apply(this, ['status', button + ':change', data]);
     });
 });
+controller.connect();

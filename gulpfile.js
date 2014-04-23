@@ -6,19 +6,19 @@ var bower = require('gulp-bower'),
 
 var path = require('path');
 
-gulp.task('init', ['install', 'once']);
 gulp.task('default', ['once', 'server', 'watch']);
+gulp.task('init', ['install', 'once']);
 
 gulp.task('once', [
-    'jade',
-    'sass',
-    'js',
+    'bower',
     'img',
-    'bower'
+    'jade',
+    'js',
+    'sass'
 ]);
 
 gulp.task('server', function (next) {
-    require('./server/server');
+    require('./server/index');
 });
 
 gulp.task('jade', function () {
@@ -71,7 +71,7 @@ gulp.task('watch', function () {
         console.log('Change', file);
         server.changed(file.path);
     });
-    gulp.watch('./client/**/*.sass', ['sass']);
     gulp.watch('./client/**/*.jade', ['jade']);
     gulp.watch('./client/**/*.js', ['js']);
+    gulp.watch('./client/**/*.sass', ['sass']);
 });
