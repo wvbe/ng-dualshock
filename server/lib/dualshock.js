@@ -8,9 +8,9 @@ var input = {
 };
 
 var controller = dualShock({
+    config: "dualShock3",
     accelerometerSmoothing: false,
     analogStickSmoothing: false,
-    config: "dualShock3",
     forceNodeHid: true // Use legacay node-hid to include motion data (requires sudo)
 });
 
@@ -52,4 +52,4 @@ input.status.map(function handleStatus(button) {
         route.apply(this, ['status', button + ':change', data]);
     });
 });
-controller.connect();
+//controller.connect();
