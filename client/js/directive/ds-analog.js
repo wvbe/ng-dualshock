@@ -1,4 +1,4 @@
-angular.module('xf.dualshock.dsanalog', ['ngdualshock'])
+angular.module('xf.dualshock.dsanalog', ['xf.dualshock'])
     .directive('dsAnalog', ['$rootScope', function ($rootScope) {
         return {
             link: function ($scope, $element, $attr, $controller) {
