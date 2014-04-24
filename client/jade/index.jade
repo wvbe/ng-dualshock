@@ -85,17 +85,17 @@ html(lang="en", ng-app='dualshock')
 			script(type='text/javascript', src='vendor/angular/angular.js')
 			script(type='text/javascript', src='vendor/angular-socket-io/socket.js')
 			script(type='text/javascript', src='js/module.js')
-            script(type='text/javascript', src='js/directive/ds-analog.js')
+			script(type='text/javascript', src='js/directive/ds-analog.js')
 			script(type='text/javascript', src='js/directive/ds-status.js')
-            script(type='text/javascript', src='js/directive/ds-button.js')
-            script(type='text/javascript', src='js/directive/ds-motion.js')
-            script(type='text/javascript').
-                angular.module('dualshock', [
-                    'xf.dualshock'
-                ]).run(function(xfDualshockService) {
-                    xfDualshockService.init({
-                        host: 'http://localhost:8082'
-                    });
-                }).controller('debugController', ['$scope', 'xfDualshockService', function($scope, xfDualshockService){
-                    $scope.debug = xfDualshockService.getState();
-                }])
+			script(type='text/javascript', src='js/directive/ds-button.js')
+			script(type='text/javascript', src='js/directive/ds-motion.js')
+			script(type='text/javascript').
+				angular.module('dualshock', [
+					'xf.dualshock'
+				]).run(function(xfDualshockService) {
+					xfDualshockService.init({
+						host: 'http://localhost:8082'
+					});
+				}).controller('debugController', ['$scope', 'xfDualshockService', function($scope, xfDualshockService){
+					$scope.debug = xfDualshockService.getState();
+				}])

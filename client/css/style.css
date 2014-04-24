@@ -1,33 +1,36 @@
 /* line 1, ../sass/style.sass */
 body {
-  background-color: #222222;
-  color: #cccccc;
+	background-color: #222222;
+	color: #cccccc;
 }
 
 /* line 5, ../sass/style.sass */
 #dualshock {
-  position: relative;
-  width: 666px;
-  height: 200px;
+	position: relative;
+	width: 666px;
+	height: 200px;
 }
+
 /* line 10, ../sass/style.sass */
 #dualshock .buttons {
-  position: absolute;
-  bottom: 0px;
-  height: 32px;
-  width: 100%;
-  left: 0;
+	position: absolute;
+	bottom: 0px;
+	height: 32px;
+	width: 100%;
+	left: 0;
 }
+
 /* line 16, ../sass/style.sass */
 #dualshock .buttons > * {
-  background-color: #444444;
-  border: none;
-  min-width: 32px;
-  height: 100%;
-  line-height: 32px;
-  text-align: center;
+	background-color: #444444;
+	border: none;
+	min-width: 32px;
+	height: 100%;
+	line-height: 32px;
+	text-align: center;
 }
+
 /* line 23, ../sass/style.sass */
 #dualshock .buttons > *.pressed {
-  background-color: orange;
+	background-color: orange;
 }
