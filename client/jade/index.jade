@@ -69,7 +69,6 @@ html(lang="en", ng-app='dualshock')
 					pre Force vector {{getVector() | json}}
 					pre Force vector size {{getValue()}}
 
-
 			section#motion-test
 				h1 Motion test
 				div(ds-motion, key='rightLeft')
@@ -80,7 +79,17 @@ html(lang="en", ng-app='dualshock')
 					label upDown force vector size {{getValue()}} ({{getRaw()}})
 				div(ds-motion, key='forwardBackward')
 					.knob(style='{{getStyle()}}')
-					label forwardBackward force vector size {{getValue()}} ({{getRaw()}})
+					label forwardBackward force vector size {{getValue()}} ({{getRaw()}})                                                                                                     section#motion-test
+			h1 Status test
+			.row(ds-status, key='connection')
+				label Connection
+				span {{getMessage()}}
+			.row(ds-status, key='charging')
+				label Charge status
+				span {{getMessage()}}
+			.row(ds-status, key='battery')
+				label Battery
+				span {{getMessage()}}
 
 			script(type='text/javascript', src='vendor/angular/angular.js')
 			script(type='text/javascript', src='vendor/angular-socket-io/socket.js')

@@ -21,6 +21,7 @@ angular.module('xf.dualshock', [
 
 
 		function initSocket(config) {
+			// assumes "state" object has already been constructed w/ emptyState()
 			if (!config)
 				config = {};
 			var ioSocket = io.connect(config.host || 'http://localhost:8082');
@@ -29,6 +30,12 @@ angular.module('xf.dualshock', [
 				prefix: config.prefix,
 				scope: config.scope
 			});
+			xfDualshockIo.on('initial', function (initialData) {
+				for (var statusType in initialData.status) {
+					$rootScope.$emit(['dualshock', 'status', statusType, 'change'].join(':'), initialData.status[statusType]);
+					state.status[statusType] = initialData.status[statusType];
+				}
+			})
 		}
 
 		function emptyState(config) {
@@ -50,6 +57,7 @@ angular.module('xf.dualshock', [
 						var name = desc[0];
 						var evnt = desc[1];
 						$rootScope.$emit(['dualshock', buttonType, name, evnt].join(':'), update.data);
+
 						state[buttonType][name] = (buttonType == 'button' ? (evnt == 'press' ? true : false) : update.data);
 					})
 				})(buttonType);
@@ -58,8 +66,8 @@ angular.module('xf.dualshock', [
 
 		return {
 			init: function (config) {
-				initSocket(config);
 				emptyState(config);
+				initSocket(config);
 				bind(config);
 			},
 			getState: function () {
