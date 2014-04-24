@@ -2,23 +2,31 @@ var bower = require('gulp-bower'),
     compass = require('gulp-compass'),
     gulp = require('gulp'),
     jade = require('gulp-jade'),
-    livereload = require('gulp-livereload');
+    livereload = require('gulp-livereload'),
+	path = require('path');
 
 var path = require('path');
 
+gulp.task('default', [
+	'once',
+	//'server', // should not be in default, node-hid (dependency on linux) needs sudo,
+				// so if you'd want to run server through gulp you had better make that
+				// an explicit choice
+	'watch'
+]);
 gulp.task('init', ['install', 'once']);
-gulp.task('default', ['once', 'server', 'watch']);
 
 gulp.task('once', [
-    'jade',
-    'sass',
-    'js',
+    'bower',
     'img',
-    'bower'
+    'jade',
+    'js',
+    'sass'
 ]);
 
 gulp.task('server', function (next) {
-    require('./server/server');
+	console.log('# Starting DualShock & Socket.io servers');
+    require('./server/index');
 });
 
 gulp.task('jade', function () {
@@ -65,13 +73,29 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./build/'));
 });
 
+
+
+var liveReloadObnoxiousEventAmountBonusCodeTimeout = false;
+var liveReloadObnoxiousEventAmountBonusCodeChanges = [];
+var liveReloadObnoxiousEventAmountBonusCodeDebugLevel = 'not much';
+
 gulp.task('watch', function () {
     var server = livereload();
     gulp.watch('./build/**/*').on('change', function (file) {
-        console.log('Change', file);
+		liveReloadObnoxiousEventAmountBonusCodeChanges.push(file.path);
+		if(!liveReloadObnoxiousEventAmountBonusCodeTimeout)
+			liveReloadObnoxiousEventAmountBonusCodeTimeout = setTimeout(function() {
+				var changeNum = liveReloadObnoxiousEventAmountBonusCodeChanges.length;
+				console.log('# '+changeNum+' change'+(changeNum>1?'s':'')+' in build folder detected, live reload fired.');
+				if(liveReloadObnoxiousEventAmountBonusCodeDebugLevel=='much')
+					console.log('\t'+liveReloadObnoxiousEventAmountBonusCodeChanges.join('\n\t'));
+				liveReloadObnoxiousEventAmountBonusCodeChanges = [];
+			}, 10);
         server.changed(file.path);
     });
-    gulp.watch('./client/**/*.sass', ['sass']);
-    gulp.watch('./client/**/*.jade', ['jade']);
-    gulp.watch('./client/**/*.js', ['js']);
+    gulp.watch('./client/**/*.jade', ['jade', function() { console.log('# Rebuilding change in Jade.'); }]);
+    gulp.watch('./client/**/*.js', ['js', function() { console.log('# Rebuilding change in JS.'); }]);
+    gulp.watch('./client/**/*.sass', ['sass', function() { console.log('# Rebuilding change in SASS.'); }]);
+	console.log('# Watching Jade, JS and SASS to auto-build.');
+	console.log('# Watching build folder to live reload.');
 });

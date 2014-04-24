@@ -1,0 +1,1 @@
+var dualshock = require('./lib/dualshock');

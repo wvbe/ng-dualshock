@@ -3,6 +3,7 @@ angular.module('xf.dualshock', [
 	'xf.dualshock.dsanalog',
 	'xf.dualshock.dsbutton',
 	'xf.dualshock.dsmotion',
+	'xf.dualshock.dsstatus'
 
 	'btford.socket-io'
 ])
