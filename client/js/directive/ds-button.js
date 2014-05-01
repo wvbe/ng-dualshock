@@ -11,14 +11,20 @@ angular.module('xf.dualshock.dsbutton', ['xf.dualshock'])
 					lastTapped = 0,
 					state = {};
 
-				function isPressed() {
+				// Getters
+				function isPressed(keyName) {
+					if(keyName)
+						return state[keyName];
 					for(var i=0;i<keyNames.length;i++) // for each key
 						if(!state[keyNames[i]]) // when not true
 							return false;
 					return true;
 				}
 
+				// "Setters"
 				function press(keyName) { // registers a press, not the same as (eg. doubletap "activate")
+					if(!keyName)
+						return console.error('Key configuration press event has no keyName');
 					state[keyName] = true;
 					var prssd = true;
 					if(keyNames.length>1) // if key combination
@@ -50,7 +56,6 @@ angular.module('xf.dualshock.dsbutton', ['xf.dualshock'])
 					return double;
 				}
 
-
 				function release(keyName) {
 					state[keyName] = false;
 					var modifiers = [];
@@ -78,7 +83,10 @@ angular.module('xf.dualshock.dsbutton', ['xf.dualshock'])
 						$element.removeClass(className);
 				}
 
+				// release initially
 				release();
+
+				// bind events
 				keyNames.map(function(keyName) {
 					$rootScope.$on('dualshock:button:' + keyName + ':press', function () {
 						press(keyName);

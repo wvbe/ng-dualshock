@@ -3,7 +3,7 @@ html(lang="en", ng-app='dualshock')
 	head
 		title ng-dualshock Examples
 		link(rel='stylesheet', href='css/style.css')
-		script(type='text/javascript', src='http://localhost:8082/socket.io/socket.io.js')
+		script(type='text/javascript', src='http://192.168.1.58:8082/socket.io/socket.io.js')
 	body
 		#debug(ng-controller='debugController')
 			h1 DualShock service state
@@ -92,6 +92,10 @@ html(lang="en", ng-app='dualshock')
 					div(ds-button, key='x+circle', double-tap-delay='1000') &times; + &bull;
 					div(ds-button, keys='square+circle', double-tap-delay='1000') &#9632; + &bull;
 					div(ds-button, keys='triangle+x', double-tap-delay='1000') &#9650; + &times;
+				h2 Sequence test
+				.row
+					label Konami code
+					div(ds-button, keys='dpadUp,dpadUp,dpadDown,dpadDown,dpadLeft,dpadRight,dpadLeft,dpadRight,circle,x') &uarr; &uarr; &darr; &darr; &larr; &rarr; &larr; &rarr; &bull; &times;
 
 			section#analog-test
 				h1 Analog test
@@ -140,7 +144,7 @@ html(lang="en", ng-app='dualshock')
 					'xf.dualshock'
 				]).run(function(xfDualshockService) {
 					xfDualshockService.init({
-						host: 'http://localhost:8082'
+						host: 'http://192.168.1.58:8082'
 					});
 				}).controller('debugController', ['$scope', 'xfDualshockService', function($scope, xfDualshockService){
 					$scope.debug = xfDualshockService.getState();
