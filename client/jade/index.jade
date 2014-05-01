@@ -1,5 +1,5 @@
 doctype html
-html(lang="en", ng-app='dualshock')
+html(lang=en, ng-app='dualshock')
 	head
 		title ng-dualshock Examples
 		link(rel='stylesheet', href='css/style.css')
@@ -12,90 +12,112 @@ html(lang="en", ng-app='dualshock')
 			section#button-test
 				h1 Button test
 				.row
-					div(ds-button, key='l2') L2
-					div(ds-button, key='l1') L1
-					div(ds-button, key='dpadLeft') &larr;
-					div(ds-button, key='dpadUp') &uarr;
-					div(ds-button, key='dpadDown') &darr;
-					div(ds-button, key='dpadRight') &rarr;
-					div(ds-button, key='leftAnalogBump') LAB
-					div(ds-button, key='start') START
-					div(ds-button, key='psxButton') PS
-					div(ds-button, key='select') SELECT
-					div(ds-button, key='rightAnalogBump') RAB
-					div(ds-button, key='square') &#9632;
-					div(ds-button, key='triangle') &#9650;
-					div(ds-button, key='x') &times;
-					div(ds-button, key='circle') &bull;
-					div(ds-button, key='r1') R1
-					div(ds-button, key='r2') R2
+					label Classic notation (ds-button=XX)
+					div(ds-button='l2') L2
+					div(ds-button='l1') L1
+					div(ds-button='dpadLeft') &larr;
+					div(ds-button='dpadUp') &uarr;
+					div(ds-button='dpadDown') &darr;
+					div(ds-button='dpadRight') &rarr;
+					div(ds-button='leftAnalogBump') LAB
+					div(ds-button='start') START
+					div(ds-button='psxButton') PS
+					div(ds-button='select') SELECT
+					div(ds-button='rightAnalogBump') RAB
+					div(ds-button='square') &#9632;
+					div(ds-button='triangle') &#9650;
+					div(ds-button='x') &times;
+					div(ds-button='circle') &bull;
+					div(ds-button='r1') R1
+					div(ds-button='r2') R2
+				.row
+					label New notation (ds-button=XX)
+					div(ds-button='l2') L2
+					div(ds-button='l1') L1
+					div(ds-button='dpadLeft') &larr;
+					div(ds-button='dpadUp') &uarr;
+					div(ds-button='dpadDown') &darr;
+					div(ds-button='dpadRight') &rarr;
+					div(ds-button='leftAnalogBump') LAB
+					div(ds-button='start') START
+					div(ds-button='psxButton') PS
+					div(ds-button='select') SELECT
+					div(ds-button='rightAnalogBump') RAB
+					div(ds-button='square') &#9632;
+					div(ds-button='triangle') &#9650;
+					div(ds-button='x') &times;
+					div(ds-button='circle') &bull;
+					div(ds-button='r1') R1
+					div(ds-button='r2') R2
 				h2 Double tap delay test
 				.row
 					label 100 ms
-					div(ds-button, key='l1', double-tap-delay='100') L1
-					div(ds-button, key='square', double-tap-delay='100') &#9632;
-					div(ds-button, key='triangle', double-tap-delay='100') &#9650;
-					div(ds-button, key='x', double-tap-delay='100') &times;
-					div(ds-button, key='circle', double-tap-delay='100') &bull;
-					div(ds-button, key='r1', double-tap-delay='100') R1
+					div(ds-button='l1', double-tap-delay='100') L1
+					div(ds-button='square', double-tap-delay='100') &#9632;
+					div(ds-button='triangle', double-tap-delay='100') &#9650;
+					div(ds-button='x', double-tap-delay='100') &times;
+					div(ds-button='circle', double-tap-delay='100') &bull;
+					div(ds-button='r1', double-tap-delay='100') R1
 				.row
 					label 250 ms
-					div(ds-button, key='l1', double-tap-delay='250') L1
-					div(ds-button, key='square', double-tap-delay='250') &#9632;
-					div(ds-button, key='triangle', double-tap-delay='250') &#9650;
-					div(ds-button, key='x', double-tap-delay='250') &times;
-					div(ds-button, key='circle', double-tap-delay='250') &bull;
-					div(ds-button, key='r1', double-tap-delay='250') R1
+					div(ds-button='l1', double-tap-delay='250') L1
+					div(ds-button='square', double-tap-delay='250') &#9632;
+					div(ds-button='triangle', double-tap-delay='250') &#9650;
+					div(ds-button='x', double-tap-delay='250') &times;
+					div(ds-button='circle', double-tap-delay='250') &bull;
+					div(ds-button='r1', double-tap-delay='250') R1
 				.row
 					label 1000 ms
-					div(ds-button, key='l1', double-tap-delay='1000') L1
-					div(ds-button, key='square', double-tap-delay='1000') &#9632;
-					div(ds-button, key='triangle', double-tap-delay='1000') &#9650;
-					div(ds-button, key='x', double-tap-delay='1000') &times;
-					div(ds-button, key='circle', double-tap-delay='1000') &bull;
-					div(ds-button, key='r1', double-tap-delay='1000') R1
+					div(ds-button='l1', double-tap-delay='1000') L1
+					div(ds-button='square', double-tap-delay='1000') &#9632;
+					div(ds-button='triangle', double-tap-delay='1000') &#9650;
+					div(ds-button='x', double-tap-delay='1000') &times;
+					div(ds-button='circle', double-tap-delay='1000') &bull;
+					div(ds-button='r1', double-tap-delay='1000') R1
 				h2 Button combo test
 				.row
 					label L1 + R1
-					div(ds-button, keys='l1') L1
-					div(ds-button, keys='l1+r1') L1 + R1
-					div(ds-button, keys='r1') R1
+					div(ds-button='l1') L1
+					div(ds-button='l1+r1') L1 + R1
+					div(ds-button='r1') R1
 				.row
 					label doubleTapDelay 500 ms
-					div(ds-button, keys='l1', double-tap-delay='500') L1
-					div(ds-button, keys='l1+r1', double-tap-delay='500') L1 + R1
-					div(ds-button, keys='r1', double-tap-delay='500') R1
+					div(ds-button='l1', double-tap-delay='500') L1
+					div(ds-button='l1+r1', double-tap-delay='500') L1 + R1
+					div(ds-button='r1', double-tap-delay='500') R1
 				.row
 					label The Eagle's Claws
-					div(ds-button, keys='l1+l2+r1+r2+rightAnalogBump+leftAnalogBump') L2 + L1 + LAB + RAB + R1 + R2
+					div(ds-button='l1+l2+r1+r2+rightAnalogBump+leftAnalogBump') L2 + L1 + LAB + RAB + R1 + R2
 				.row
 					label The Button Bashers
-					div(ds-button, key='square+x', double-tap-delay='100') &#9632; + &times;
-					div(ds-button, key='triangle+circle', double-tap-delay='100') &#9650; + &bull;
-					div(ds-button, key='square+triangle', double-tap-delay='100') &#9632; + &#9650;
-					div(ds-button, key='x+circle', double-tap-delay='100') &times; + &bull;
-					div(ds-button, keys='square+circle', double-tap-delay='100') &#9632; + &bull;
-					div(ds-button, keys='triangle+x', double-tap-delay='100') &#9650; + &times;
+					div(ds-button='square+x', double-tap-delay='100') &#9632; + &times;
+					div(ds-button='triangle+circle', double-tap-delay='100') &#9650; + &bull;
+					div(ds-button='square+triangle', double-tap-delay='100') &#9632; + &#9650;
+					div(ds-button='x+circle', double-tap-delay='100') &times; + &bull;
+					div(ds-button='square+circle', double-tap-delay='100') &#9632; + &bull;
+					div(ds-button='triangle+x', double-tap-delay='100') &#9650; + &times;
 				.row
 					label &nbsp;
-					div(ds-button, key='square+x', double-tap-delay='250') &#9632; + &times;
-					div(ds-button, key='triangle+circle', double-tap-delay='250') &#9650; + &bull;
-					div(ds-button, key='square+triangle', double-tap-delay='250') &#9632; + &#9650;
-					div(ds-button, key='x+circle', double-tap-delay='250') &times; + &bull;
-					div(ds-button, keys='square+circle', double-tap-delay='250') &#9632; + &bull;
-					div(ds-button, keys='triangle+x', double-tap-delay='250') &#9650; + &times;
+					div(ds-button='square+x', double-tap-delay='250') &#9632; + &times;
+					div(ds-button='triangle+circle', double-tap-delay='250') &#9650; + &bull;
+					div(ds-button='square+triangle', double-tap-delay='250') &#9632; + &#9650;
+					div(ds-button='x+circle', double-tap-delay='250') &times; + &bull;
+					div(ds-button='square+circle', double-tap-delay='250') &#9632; + &bull;
+					div(ds-button='triangle+x', double-tap-delay='250') &#9650; + &times;
 				.row
 					label &nbsp;
-					div(ds-button, key='square+x', double-tap-delay='1000') &#9632; + &times;
-					div(ds-button, key='triangle+circle', double-tap-delay='1000') &#9650; + &bull;
-					div(ds-button, key='square+triangle', double-tap-delay='1000') &#9632; + &#9650;
-					div(ds-button, key='x+circle', double-tap-delay='1000') &times; + &bull;
-					div(ds-button, keys='square+circle', double-tap-delay='1000') &#9632; + &bull;
-					div(ds-button, keys='triangle+x', double-tap-delay='1000') &#9650; + &times;
+					div(ds-button='square+x', double-tap-delay='1000') &#9632; + &times;
+					div(ds-button='triangle+circle', double-tap-delay='1000') &#9650; + &bull;
+					div(ds-button='square+triangle', double-tap-delay='1000') &#9632; + &#9650;
+					div(ds-button='x+circle', double-tap-delay='1000') &times; + &bull;
+					div(ds-button='square+circle', double-tap-delay='1000') &#9632; + &bull;
+					div(ds-button='triangle+x', double-tap-delay='1000') &#9650; + &times;
 				h2 Sequence test
 				.row
 					label Konami code
-					div(ds-button, keys='dpadUp,dpadUp,dpadDown,dpadDown,dpadLeft,dpadRight,dpadLeft,dpadRight,circle,x') &uarr; &uarr; &darr; &darr; &larr; &rarr; &larr; &rarr; &bull; &times;
+					div(ds-button="'circle,x'") circle x
+					//div(ds-button='l1+r1,l2+r2') L1R1 L2R2
+					div(ds-button="'dpadUp,dpadUp,dpadDown,dpadDown,dpadLeft,dpadRight,dpadLeft,dpadRight,circle,x'") &uarr; &uarr; &darr; &darr; &larr; &rarr; &larr; &rarr; &bull; &times;
 
 			section#analog-test
 				h1 Analog test

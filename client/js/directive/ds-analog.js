@@ -11,9 +11,11 @@ angular.module('xf.dualshock.dsanalog', ['xf.dualshock'])
 
 				$rootScope.$on('dualshock:analog:' + keyName + ':move', function (evnt, data) {
 					position = data;
+
 				});
 
 				$scope.getValue = function () {
+
 					var pos = $scope.getVector();
 					return Math.sqrt(pos.x * pos.x + pos.y * pos.y) / maxValue
 				}
