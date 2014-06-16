@@ -1,3 +1,7 @@
+What does it even do?
+===
+It is a small node app that serves data read from your dualshock 3 controller, and an interface for show. It may be worth mentioning that you'll have to run the software on the machine that's connected to the controller. Other than that, use it for awesome lifehacks and positive evolution of your family and the human race as a whole.
+
 Prerequisites
 ===
 For the package to run, you will need to install some prerequisites. These can be installed in any order but are
